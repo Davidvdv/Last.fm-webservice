@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$('#go').click(function(){
-		run($('#username').val(););
+		run($('#username').val());
 	});
 });
 
