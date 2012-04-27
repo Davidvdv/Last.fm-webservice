@@ -5,8 +5,6 @@ $(function(){
 	
 	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user='+username+'&format=json&api_key=b25b959554ed76058ac220b7b2e0a026', function(data){
 		
-		console.log(data.weeklytrackchart);
-		
 		for(i in data.weeklytrackchart.track)
 		{	
 			tr = data.weeklytrackchart.track[i].name;
@@ -15,7 +13,6 @@ $(function(){
 			
 			process(tr, pl, ar);
 		}
-		
 	});
 	
 	function process(tr, pl, ar){
