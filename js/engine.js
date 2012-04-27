@@ -1,6 +1,13 @@
-$(function(){
+$(document).ready(function(){
+	$('#go').click(function(){
+		run($('#username').val(););
+	});
+});
+
+function run(usr){
 	
-	var username = 'tmw014';
+	var username = usr;
+	
 	window.graphData = new Array();
 	window.graphData.push(['Track', 'Duration']);
 	var totalPlayTime = 0;
@@ -30,4 +37,4 @@ $(function(){
 			drawChart();
 		});
 	}
-});
+}
