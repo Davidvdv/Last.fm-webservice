@@ -48,13 +48,15 @@ body{
 	width: 900px;
 }
 	#second #progress_bar{
-		margin: 0 auto;
+		margin: 200px auto;
 		width: 500px;
 		height: 30px;
 		background: #fff;
+		border-radius: 5px;
+		overflow: hidden;
 	}
 	#second #progress_fill{
-		background: red;
+		background: rgba(255,0,0, .8);
 		height: 30px;
 		width: 0%;
 	}
@@ -63,6 +65,7 @@ body{
 	color: #555;
 	text-shadow: 0px 1px #999;
 	text-align: center;
+	margin-bottom: 25px;
 }
 	#total span{
 		font-size: 20pt;
@@ -71,6 +74,7 @@ body{
 #chart {
 	width: 900px;
 	height: 500px;
+	margin-bottom: 25px;
 }
 	#chart iframe{
 		border-radius: 5px;
@@ -81,3 +85,14 @@ body{
 	font-size: .6em;
 	color: #fff;
 }
+
+a{
+	color: #fff;
+}
+	a:visited{
+		color: #FFF;
+	}
+
+
+
+
