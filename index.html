@@ -2,21 +2,36 @@
 <html lang="en">
 	<head>
 		<title>Awesome Last.fm thingy</title>
+		<!-- load google libraries: jQuery and Google-library -->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script type="text/javascript" src="js/engine.js"></script>
-		
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		
+		<!-- load requied files -->
 	    <script type="text/javascript" src="js/chart.js"></script>
-	
+		<script type="text/javascript" src="js/engine.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		
+		<!-- require styleshet -->
 		<link rel="stylesheet" href="style/style.css" />
 	</head>
 	
 	<body>
-		<label for="username">Last.fm username</label><input type="text" name="username" id="username" />
-		<button id="go">Go!</button>
+
+		<div id="first">
+			<p>
+				<label for="username">Enter your Last.fm username</label>
+			</p>
+			<p>
+				<input type="text" name="username" id="username" />
+				<button id="go">Go!</button>
+			</p>
+		</div>
 		
-		<div id="total"></div>
-		<div id="chart"></div>
+		<div id="second">
+			<div id="total"></div>
+			<div id="chart"></div>			
+		</div>
+
 		
 	</body>
 </html>
