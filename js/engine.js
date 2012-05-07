@@ -14,7 +14,7 @@ function Engine(usr){
 	this.graphData = new Array();
 	
 	// Push first row into chart-array which is used to display the titles
-	this.graphData.push(['Track', 'Duration']);
+	this.graphData.push(['Track', 'Duration in min.']);
 	
 	// Run the application
 	this.initialize();
