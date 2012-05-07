@@ -133,7 +133,7 @@ Engine.prototype.render = function(){
 	$('#total').append("<span> or "+ Math.ceil(app.totalPlayTime / 60) + "hr</span>");	
 	
 	// Render days
-	$('#total').append("<span> or "+ Math.ceil(app.totalPlayTime / 3600) + "days</span>");
+	$('#total').append("<span> or "+ Math.ceil(app.totalPlayTime / 1440) + "days</span>");
 	
 }
 
