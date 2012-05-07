@@ -75,16 +75,18 @@ Engine.prototype.initialize = function(){
 }
 	
 Engine.prototype.process = function(tr, pl, ar){
-	// 
+	// Save a reference to the this-object
 	app = this; 
+	
 	req = $.getJSON('http://ws.audioscrobbler.com/2.0/',{method:'track.getInfo', format: 'json', api_key: 'b25b959554ed76058ac220b7b2e0a026', artist:ar, track:tr});
 	
 	req.complete(function(d){
 		
 			duration = $.parseJSON(d.responseText).track.duration * pl;
-			duration = ((duration / 1000) /60);
+			duration = Math.ceil((duration / 1000) /60);
+			
 			app.totalPlayTime += duration;
-			$('#total').html(app.totalPlayTime);
+			$('#total').html(app.totalPlayTime + "min.");
 			app.graphData.push([tr, duration]);
 			drawChart(app.graphData, app.username);
 		});

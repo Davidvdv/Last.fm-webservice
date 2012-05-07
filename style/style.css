@@ -39,9 +39,17 @@ body{
 
 /* We don't need this to be visible yet */
 #second{display: none; margin: 0 auto; width: 900px; }
-
+#total{
+	font-size: 70pt;
+	color: #666;
+	text-shadow: 0px 1px #999;
+	text-align: center;
+}
 /* Some styling for the chart */
 #chart {
 	width: 900px;
 	height: 500px;
 }
+	#chart iframe{
+		border-radius: 5px;
+	}
