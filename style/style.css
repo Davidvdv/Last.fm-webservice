@@ -15,32 +15,9 @@ body{
 	border-radius: 5px;
 	padding: 20px;
 }
-	/* Label styles */
-	#first label{
-		color: #333;
-		font-weight: bold;
-	}
-	/* Form element stylings */
-	#first input, #first button{
-		height: 50px;
-		padding: 5px;
-		font-size: 20pt;
-	}
-	/* Specific input style */
-	#first input{
-		width: 300px;
-		border: 1px solid #999;
-	}
-	/* Specific button style */
-	#first button{
-		font-size: 20pt;
-		height: 62px;
-	}
-
-
 
 /* We don't need this to be visible yet */
-#second{display: none;}
+#second{display: none; margin: 0 auto; width: 900px; }
 
 /* Some styling for the chart */
 #chart {

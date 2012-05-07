@@ -12,19 +12,21 @@
 		<script type="text/javascript" src="js/main.js"></script>
 		
 		<!-- require styleshet -->
+		<link rel="stylesheet" href="style/normalize.css" />
 		<link rel="stylesheet" href="style/style.css" />
 	</head>
 	
 	<body>
 
 		<div id="first">
-			<p>
-				<label for="username">Enter your Last.fm username</label>
-			</p>
-			<p>
-				<input type="text" name="username" id="username" />
-				<button id="go">Go!</button>
-			</p>
+			<form id="form">
+				<legend>Awesome Last.fm thingy</legend>
+				<fieldset>
+					<label for="username">Enter your Last.fm username</label>
+					<input type="text" name="username" id="username" />
+					<input type="submit" id="go" value="Go!" />
+				</fieldset>
+			</form>
 		</div>
 		
 		<div id="second">
