@@ -61,6 +61,6 @@ Engine.prototype.process = function(tr, pl, ar){
 			app.totalPlayTime += duration;
 			$('#total').html(app.totalPlayTime);
 			app.graphData.push([tr, duration]);
-			drawChart(app.graphData);
+			drawChart(app.graphData, app.username);
 		});
 }
