@@ -73,21 +73,36 @@ Engine.prototype.initialize = function(){
 		
 	});
 }
-	
+
+/* Process method
+ * @desc This method will process the individual tracks by
+ * fetching their length, multiplying their length with the playcount and send it to the graph
+*/	
 Engine.prototype.process = function(tr, pl, ar){
 	// Save a reference to the this-object
 	app = this; 
-	
+
+	// create a net request object
 	req = $.getJSON('http://ws.audioscrobbler.com/2.0/',{method:'track.getInfo', format: 'json', api_key: 'b25b959554ed76058ac220b7b2e0a026', artist:ar, track:tr});
-	
+
+	// If the request completes
 	req.complete(function(d){
+		// Fetch the duration of the
+		duration = $.parseJSON(d.responseText).track.duration * pl;
 		
-			duration = $.parseJSON(d.responseText).track.duration * pl;
-			duration = Math.ceil((duration / 1000) /60);
-			
-			app.totalPlayTime += duration;
-			$('#total').html(app.totalPlayTime + "min.");
-			app.graphData.push([tr, duration]);
-			drawChart(app.graphData, app.username);
-		});
+		// Input: miliseconds. Output: Minutes.. Boom. Like magic!
+		duration = Math.ceil((duration / 1000) /60);
+		
+		// Add the total duration of this individual song to the total
+		app.totalPlayTime += duration;
+		
+		// Write the total playtime to screen so the user has something to enjoy
+		$('#total').html(app.totalPlayTime + "min.");
+		
+		// And for the graph; push a new graph-entry into the array
+		app.graphData.push([tr, duration]);
+		
+		// Redraw the chart
+		drawChart(app.graphData, app.username);
+	});
 }
