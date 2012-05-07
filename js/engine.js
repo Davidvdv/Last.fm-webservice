@@ -34,24 +34,39 @@ Engine.prototype.initialize = function(){
 	// Show the graph
 	$("#second").show();
 	
-	// Fire first request
-	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user='+this.username+'&format=json&api_key=b25b959554ed76058ac220b7b2e0a026', function(data){
+	/* Fire first API call
+	* This call will return all the tracks the given user listened to in the last week.
+	* We're feeding the parameters through jQuery so they will be escaped properly
+	*/
+	$.getJSON('http://ws.audioscrobbler.com/2.0/',{method:'user.getweeklytrackchart', user:this.username, format:'json', api_key:'b25b959554ed76058ac220b7b2e0a026'}, function(data){
+		
+		/* The Last.fm API will return an error code in JSON-format when something goes wrong.
+		* So if this error is undefined, everything went as expected. If something goes wrong
+		* we will notify the user and ask him whether he likes to try again or just stare at a blank page
+		*/
 		
 		if(data.error == undefined){
+			
+			// Yay. Everything went allright. Now: iterate over each track...
 			for(i in data.weeklytrackchart.track)
 			{	
+				// ...and save the needed details such as name, playcount and artist
 				tr = data.weeklytrackchart.track[i].name;
 				pl = data.weeklytrackchart.track[i].playcount;
 				ar = data.weeklytrackchart.track[i].artist["#text"];
-			
+				
+				// Finally feed the fetched data into the processor
 				app.process(tr, pl, ar);
 			}
 		}
 		else{
+			// Lets ask some questions
 			if(confirm('Last.fm user is not found. Would you like to retry?')){
-				window.location.reload(true);
+				// Ahh, how cute. He likes to try again
+				window.location.reload(true); // <- nasty method ;)
 			}
 			else{
+				// Are you serious?
 				alert('Ah well. Have fun staring at a blank page then ;)');
 			}
 		}
