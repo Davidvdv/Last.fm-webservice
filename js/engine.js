@@ -99,7 +99,7 @@ Engine.prototype.process = function(tr, pl, ar){
 
 	// If the request completes
 	req.complete(function(d){
-		// Fetch the duration of the
+		// Fetch the duration of the track
 		duration = $.parseJSON(d.responseText).track.duration * pl;
 		
 		// Input: miliseconds. Output: Minutes.. Boom. Like magic!
@@ -109,7 +109,7 @@ Engine.prototype.process = function(tr, pl, ar){
 		app.totalPlayTime += duration;
 		
 		// Write the total playtime to screen so the user has something to enjoy
-		$('#total').html(app.totalPlayTime + "min.");
+		app.render();
 		
 		// And for the graph; push a new graph-entry into the array
 		app.graphData.push([ar +' - '+ tr, duration]);
@@ -118,3 +118,27 @@ Engine.prototype.process = function(tr, pl, ar){
 		drawChart(app.graphData, app.username);
 	});
 }
+
+/* render method
+ * @desc This method will render the total time spend listening to music
+*/
+Engine.prototype.render = function(){
+	// save reference to the this-object
+	app = this;
+	
+	// Render minutes
+	$('#total').html(app.totalPlayTime + "min.");
+	
+	// render hours
+	$('#total').append("<span> or "+ Math.ceil(app.totalPlayTime / 60) + "hr</span>");	
+	
+	// Render days
+	$('#total').append("<span> or "+ Math.ceil(app.totalPlayTime / 3600) + "days</span>");
+	
+}
+
+
+
+
+
+
