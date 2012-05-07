@@ -37,20 +37,30 @@ Engine.prototype.initialize = function(){
 	// Fire first request
 	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=user.getweeklytrackchart&user='+this.username+'&format=json&api_key=b25b959554ed76058ac220b7b2e0a026', function(data){
 		
-		for(i in data.weeklytrackchart.track)
-		{	
-			tr = data.weeklytrackchart.track[i].name;
-			pl = data.weeklytrackchart.track[i].playcount;
-			ar = data.weeklytrackchart.track[i].artist["#text"];
+		if(data.error == undefined){
+			for(i in data.weeklytrackchart.track)
+			{	
+				tr = data.weeklytrackchart.track[i].name;
+				pl = data.weeklytrackchart.track[i].playcount;
+				ar = data.weeklytrackchart.track[i].artist["#text"];
 			
-			app.process(tr, pl, ar);
+				app.process(tr, pl, ar);
+			}
+		}
+		else{
+			if(confirm('Last.fm user is not found. Would you like to retry?')){
+				window.location.reload(true);
+			}
+			else{
+				alert('Ah well. Have fun staring at a blank page then ;)');
+			}
 		}
 		
 	});
 }
 	
 Engine.prototype.process = function(tr, pl, ar){
-	//
+	// 
 	app = this; 
 	req = $.getJSON('http://ws.audioscrobbler.com/2.0/',{method:'track.getInfo', format: 'json', api_key: 'b25b959554ed76058ac220b7b2e0a026', artist:ar, track:tr});
 	

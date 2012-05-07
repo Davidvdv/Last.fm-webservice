@@ -15,6 +15,27 @@ body{
 	border-radius: 5px;
 	padding: 20px;
 }
+	#first fieldset{
+		border: 0px;
+		margin: 0px;
+		padding: 0px;
+	}
+	#first legend{
+		font-style: italic;
+		color: #999;
+		margin-bottom: 25px;
+	}
+	#first label{
+		font-weight: bold;
+	}
+	#first input[type="text"]{
+		padding: 10px;
+		width: 300px;
+		border: 1px solid #999;
+	}
+	#first input[type="submit"]{
+		padding: 11px;
+	}
 
 /* We don't need this to be visible yet */
 #second{display: none; margin: 0 auto; width: 900px; }
