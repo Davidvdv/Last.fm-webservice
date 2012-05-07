@@ -18,6 +18,10 @@ function Engine(usr){
 	
 	// Run the application
 	this.initialize();
+	
+	// Create an array that acts as an request-queue
+	this.total_requests = 0;
+	this.pending_requests = 0;
 }
 
 /* Initialize method
@@ -96,9 +100,16 @@ Engine.prototype.process = function(tr, pl, ar){
 
 	// create a net request object
 	req = $.getJSON('http://ws.audioscrobbler.com/2.0/',{method:'track.getInfo', format: 'json', api_key: 'b25b959554ed76058ac220b7b2e0a026', artist:ar, track:tr});
-
+	
+	// increase pending_requests counter
+	app.pending_requests++;
+	app.total_requests++;
+	
 	// If the request completes
 	req.complete(function(d){
+		// Request is complete. Decrease pending_requests by one
+		app.pending_requests--;
+				
 		// Fetch the duration of the track
 		duration = $.parseJSON(d.responseText).track.duration * pl;
 		
@@ -114,8 +125,6 @@ Engine.prototype.process = function(tr, pl, ar){
 		// And for the graph; push a new graph-entry into the array
 		app.graphData.push([ar +' - '+ tr, duration]);
 		
-		// Redraw the chart
-		drawChart(app.graphData, app.username);
 	});
 }
 
@@ -125,6 +134,22 @@ Engine.prototype.process = function(tr, pl, ar){
 Engine.prototype.render = function(){
 	// save reference to the this-object
 	app = this;
+	
+	// Only show graph if all requests are finished
+	if(app.pending_requests == 0){
+		// hide progress bar
+		$("#progress_bar").hide();
+		// Draw chart
+		drawChart(app.graphData, app.username);
+	}
+	else{
+		var percent = app.pending_requests / app.total_requests;
+		percent = 100 - Math.ceil(percent * 100);
+		$("#progress_fill").css('width', percent+'%');
+	}
+	
+	
+	
 	
 	// Render minutes
 	$('#total').html(app.totalPlayTime + "min.");

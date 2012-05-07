@@ -42,7 +42,22 @@ body{
 	}
 
 /* We don't need this to be visible yet */
-#second{display: none; margin: 0 auto; width: 900px; }
+#second{
+	display: none;
+	margin: 0 auto;
+	width: 900px;
+}
+	#second #progress_bar{
+		margin: 0 auto;
+		width: 500px;
+		height: 30px;
+		background: #fff;
+	}
+	#second #progress_fill{
+		background: red;
+		height: 30px;
+		width: 0%;
+	}
 #total{
 	font-size: 70pt;
 	color: #555;
