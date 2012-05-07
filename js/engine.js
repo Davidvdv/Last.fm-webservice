@@ -47,16 +47,28 @@ Engine.prototype.initialize = function(){
 		
 		if(data.error == undefined){
 			
-			// Yay. Everything went allright. Now: iterate over each track...
-			for(i in data.weeklytrackchart.track)
-			{	
-				// ...and save the needed details such as name, playcount and artist
-				tr = data.weeklytrackchart.track[i].name;
-				pl = data.weeklytrackchart.track[i].playcount;
-				ar = data.weeklytrackchart.track[i].artist["#text"];
-				
-				// Finally feed the fetched data into the processor
-				app.process(tr, pl, ar);
+			if(data.weeklytrackchart.track == undefined) {
+				// The user has not listened to some music lately
+				if(confirm('I can not create a chart! Start listen some music first!')){
+					window.location.reload(true);
+				}
+				else {
+					// Are you serious?
+					alert('Ah well. Have fun staring at a blank page then ;)');
+				}
+			}
+			else{
+				// Yay. Everything went allright. Now: iterate over each track...
+				for(i in data.weeklytrackchart.track)
+				{	
+					// ...and save the needed details such as name, playcount and artist
+					tr = data.weeklytrackchart.track[i].name;
+					pl = data.weeklytrackchart.track[i].playcount;
+					ar = data.weeklytrackchart.track[i].artist["#text"];
+
+					// Finally feed the fetched data into the processor
+					app.process(tr, pl, ar);
+				}
 			}
 		}
 		else{
