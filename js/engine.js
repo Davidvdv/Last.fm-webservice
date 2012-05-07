@@ -112,7 +112,7 @@ Engine.prototype.process = function(tr, pl, ar){
 		$('#total').html(app.totalPlayTime + "min.");
 		
 		// And for the graph; push a new graph-entry into the array
-		app.graphData.push([tr, duration]);
+		app.graphData.push([ar +' - '+ tr, duration]);
 		
 		// Redraw the chart
 		drawChart(app.graphData, app.username);
